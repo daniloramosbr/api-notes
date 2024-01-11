@@ -67,13 +67,15 @@ class Controller {
 
   async PutNotes(req, res) {
     try {
-      const { text } = req.body;
+      const text = req.body;
 
       const id = req.id;
 
       await updateId(id, text);
 
       res.status(201).send("texto atualizado com sucesso!");
+
+
     } catch (error) {
       res.status(500).send(error)
     }
