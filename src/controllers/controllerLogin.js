@@ -1,5 +1,6 @@
 import generateToken, { createLogin, findLogin } from "../services.js/serviceLogin.js"
-
+import { findEmail } from "../services.js/serviceLogin.js"
+import bcrypt from "bcrypt";
 
 class ControllerLogin {
 
@@ -11,7 +12,7 @@ class ControllerLogin {
         
        const user = await createLogin(body)
 
-        const token = generateToken(user.id)
+        const token = generateToken(user.id, user.username)
 
         res.status(201).send(token)
 
@@ -37,6 +38,40 @@ class ControllerLogin {
 
     }
 
+    async ValidEmail(req, res) {
+
+      const {email, password} = req.body 
+
+      try {
+
+        const user = await findEmail(email)
+
+        if (user < 1) { 
+         return res.status(404).send({
+            message: 'usuário ou senha incorretos'
+          })
+        }
+
+        const passwordIsValid = bcrypt.compare(password, user[0].password)
+
+
+        if (!passwordIsValid) {
+
+         return res.status(404).send({
+            message: 'usuário ou senha incorretos'
+          })
+        }
+
+        const token = generateToken(user[0].id, user[0].username)
+
+        res.status(201).send(token)
+        
+      } catch (error) {
+
+        return error
+      }
+
+    }
 
 }
 

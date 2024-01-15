@@ -10,8 +10,8 @@ routes.get("/notes/:id", validId, Controller.GetId)
 routes.post("/notes", Controller.PostNotes)
 routes.delete("/notes/:id", validId, Controller.Deletenotes)
 routes.patch("/notes/:id", validId, Controller.PutNotes)
-routes.get("/login", controllerLogin.GetLogin)
-routes.post("/login", controllerLogin.PostLogin)
-
+routes.post("/signup", controllerLogin.PostLogin)
+routes.post("/signin", controllerLogin.ValidEmail)
+routes.get("/users", controllerLogin.GetLogin)
 
 export default routes

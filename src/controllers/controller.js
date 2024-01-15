@@ -2,8 +2,7 @@ import {
   create,
   deleteService,
   findAll,
-  findId,
-  updateId,
+  updateId, FindOne
 } from "../services.js/service.js";
 
 class Controller {
@@ -42,13 +41,13 @@ class Controller {
 
       const id = req.id
 
-    const result = await findId(id);
+      const user = await FindOne(id);
 
-    res.status(200).send(result);
+      res.status(200).send(user);
     
       
     } catch (error) {
-      res.status(500).send(error)
+      res.status(500).send(error.message)
     }
   }
 
