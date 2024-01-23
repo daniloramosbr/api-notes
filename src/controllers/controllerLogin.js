@@ -13,6 +13,7 @@ class ControllerLogin {
         const token = generateToken(user.id, user.username)
 
         res.status(201).send(token)
+        
 
       } catch (error) {
 
