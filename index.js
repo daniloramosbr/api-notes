@@ -1,5 +1,5 @@
-import routes from "./routes/routes.js";
-import { connectDb } from "./database/connect.js";
+import routes from "./src/routes/routes.js";
+import { connectDb } from "./src/database/connect.js";
 import { configDotenv } from "dotenv";
 
 const dotenv = configDotenv()
