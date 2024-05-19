@@ -1,6 +1,7 @@
 import routes from "./src/routes/routes.js";
 import { connectDb } from "./src/database/connect.js";
 import { configDotenv } from "dotenv";
+import Cors from "cors"
 
 const dotenv = configDotenv()
 
@@ -12,8 +13,10 @@ const port = 2904
 
 app.use(json())
 
+app.options('*', Cors())
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Origin", "*")
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
